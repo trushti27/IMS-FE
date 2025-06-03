@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <head>
     <title>IMS signup</title>
+
+    <script>
+        function createacc()
+        {
+            const name=document.getElementsById("n").value
+            const email=document.getElementsById("e").value
+            const password=document.getElementsById("p").value
+            fetch("http://127.0.0.1:8000/users",{
+                method: 'POST',
+                haders: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name:name,
+                    email: email,
+                    password:password
+                }).then((res)=>res.json())  
+            })
+        }
+    </script>
 </head>
 <body>
     <form action="http://127.0.0.1:8000/users" method="POST">
-        Name: <input type="text"/><br/>
-        Email:<input type="email"/><br/>
-        Password:<input type="password"/><br>
-        <input type="submit" value="sign-up"/>
+        Name: <input type="text" id="n"/><br/>
+        Email:<input type="email" id="e"/><br/>
+        Password:<input type="password" id="p"/><br>
+        <input type="submit" value="sign-up" onclick="createacc()"/>
     </form>
 </body>
 </html>
