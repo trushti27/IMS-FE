@@ -9,25 +9,27 @@
         integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <script>
         async function getRoles() {
+            //console.log("localStorage.getItem('token')")
             
                 const responce= await  fetch("http://127.0.0.1:8000/users/roles", {
                 headers: {
                     'Content-Type': 'application/json',
                     token:localStorage.getItem('token')
-                },
+                }
             });
             const data= await responce.json();
-            if(responce===200)
+            if(responce.status===200)
             {
+               // console.log(data)
                 if(data.admin===false){
-                     document.getElementById("Manage").style.display="none"
+                     document.getElementById("ADMIN").style.display="none";
                 }
                 if(data.owner===false)
-                 document.getElementById("teamManage").style.display="none"
+                 document.getElementById("TEAM").style.display="none";
                
             }
         }
-
+    getRoles()
     </script>
 
 </head>
@@ -45,8 +47,7 @@
             <h6 class="card-subtitle mb-2 text-body-secondary">Player info</h6>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s
                 content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+            <a href="player.html" class="card-link">Card link</a>
         </div>
     </div>
 
@@ -57,13 +58,13 @@
             <h6 class="card-subtitle mb-2 text-body-secondary">teams</h6>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s
                 content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+            <a href="team.html" class="card-link">Team List</a>
+           
         </div>
     </div>
 
 
-    <div id="teamManage" class="card mt-4" style="width: 18rem;margin-left: 16px;">
+    <div id="TEAM" class="card mt-4" style="width: 18rem;margin-left: 16px;">
         <div class="card-body">
             <h5 class="card-title">Team Update</h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">Profile of your Team</h6>
@@ -74,7 +75,7 @@
         </div>
     </div>
 
-    <div id="Manage" class="card mt-4" style="width: 18rem;margin-left: 16px;">
+    <div id="ADMIN" class="card mt-4" style="width: 18rem;margin-left: 16px;">
         <div class="card-body">
             <h5 class="card-title">Admin</h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">Admin Management</h6>
