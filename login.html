@@ -20,12 +20,12 @@
     </style>
 
     <script>
-        function login() {
+       async function login() {
             const email = document.getElementById("e").value;
             const password = document.getElementById("p").value;
 
             
-            fetch("http://127.0.0.1:8000/token", {
+           const response=await fetch("http://127.0.0.1:8000/token", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -34,23 +34,23 @@
                     email: email,
                     password: password
                 })
-            }).then((res) => {
-                if(res.status===200)
+            })
+            
+                if(response.status===200)
                {
-                 const data=res.json()
+                 const data= await response.json()
                  localStorage.setItem("token",data.token)
                  window.location.href="dashboard.html"
                }
                else
                {
-                     const data=res.json()
+                     const data=await response.json()
                      const err=JSON.stringify(data)
-                     document.getElementById("responce").innerHTML=err
+                     document.getElementById("RES").innerHTML=err
                }
                 
             }
-            )     
-        }
+            
     </script>
 </head>
 <body>
@@ -65,9 +65,9 @@
             <input type="password" id="p" class="form-control" required>
         </div>
         <div class="d-grid">
-            <button class="btn btn-primary" onclick="login()">Login</button>
+            <button class="btn btn-primary" onclick="login();">Login</button>
         </div>
-        <P is="responce"> </P>
+        <P is="RES"> </P>
     </div>
 </body>
 </html>
